@@ -1,6 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "thirdparty/gpt-6.2-sol",
+  "default_agent": "implementer",
+  "instructions": [
+    "~/.config/opencode/personal-instructions.md"
+  ],
+  "agents": {
+    "implementer": {
+      "description": "Implement requested changes with focused verification",
+      "mode": "primary",
+      "system": "Follow the personal instructions. Inspect the repository before editing, preserve unrelated work, keep changes narrowly scoped, and verify meaningful changes with the project's relevant checks."
+    },
+    "reviewer": {
+      "description": "Review changes for bugs, regressions, and missing tests without editing",
+      "mode": "subagent",
+      "system": "Review the current changes as a senior engineer. Prioritize correctness, behavioral regressions, security issues, and missing tests. Report findings first with file and line references. Do not edit files. Separate confirmed findings from open questions."
+    }
+  },
   "providers": {
     "thirdparty": {
       "name": "Third-party OpenAI Gateway",

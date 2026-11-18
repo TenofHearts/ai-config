@@ -71,17 +71,19 @@ To share changes, edit `codex/dotfiles.config.toml` in the clone, commit, and pu
 ## OpenCode setup
 
 Install OpenCode separately. From the dotfiles repository, run
-`./install.sh --only opencode` to link the overlay to
-`~/.config/opencode/dotfiles.config.json`. Your default config stays in place.
+`./install.sh --only opencode` to link the shared OpenCode configuration,
+personal instructions, and CLI settings into `~/.config/opencode/`. Your other
+local configuration stays in place.
 For a standalone clone, copy `opencode/dotfiles.config.json` to that path.
 
 Store your gateway API key in `~/.config/opencode/thirdparty.key` and restrict
 its permissions with `chmod 600 ~/.config/opencode/thirdparty.key`.
 Keep this file local; never commit credentials.
 
-Reload Zsh and run `oc`. The alias supplies the overlay through
+Reload Zsh and run `oc`. The alias supplies the server overlay through
 `OPENCODE_CONFIG_CONTENT`, which merges after normal user and project configs,
 and starts a private server with `--standalone` so the overlay applies to this
 invocation. Matching settings take precedence; unrelated settings are preserved.
 Managed system settings can still take precedence. Plain `opencode` uses its
-usual configuration. Additional arguments can be passed to `oc` normally.
+usual server configuration, while the linked `cli.json` applies to the terminal
+client. Additional arguments can be passed to `oc` normally.
