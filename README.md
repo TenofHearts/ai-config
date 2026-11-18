@@ -7,6 +7,7 @@ Install each agent separately; this repository contains configuration only.
 
 | Agent | Configuration | Setup |
 | --- | --- | --- |
+| OpenCode | `opencode/dotfiles.config.json` | [OpenCode setup](#opencode-setup) |
 | Codex | `codex/dotfiles.config.toml` | [Codex setup](#codex-setup) |
 
 Keep each agent’s shared configuration in its own directory.
@@ -66,3 +67,21 @@ that file. Run `codex` without the profile flag to use your usual defaults.
 Run `git pull` inside the clone, then repeat your platform’s copy command to
 refresh the installed profile. Restart Codex to load the updated settings.
 To share changes, edit `codex/dotfiles.config.toml` in the clone, commit, and push.
+
+## OpenCode setup
+
+Install OpenCode separately. From the dotfiles repository, run
+`./install.sh --only opencode` to link the overlay to
+`~/.config/opencode/dotfiles.config.json`. Your default config stays in place.
+For a standalone clone, copy `opencode/dotfiles.config.json` to that path.
+
+Store your gateway API key in `~/.config/opencode/thirdparty.key` and restrict
+its permissions with `chmod 600 ~/.config/opencode/thirdparty.key`.
+Keep this file local; never commit credentials.
+
+Reload Zsh and run `oc`. The alias supplies the overlay through
+`OPENCODE_CONFIG_CONTENT`, which merges after normal user and project configs,
+and starts a private server with `--standalone` so the overlay applies to this
+invocation. Matching settings take precedence; unrelated settings are preserved.
+Managed system settings can still take precedence. Plain `opencode` uses its
+usual configuration. Additional arguments can be passed to `oc` normally.
