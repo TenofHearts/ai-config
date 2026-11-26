@@ -1,8 +1,5 @@
 # AI agent configuration
 
-The [parent dotfiles](https://github.com/TenofHearts/dotfiles) provide the `cx`
-and `oc` aliases for Bash and Zsh.
-
 ## Codex
 
 Run `cx` (or `codex --profile dotfiles`) to use the [shared profile](codex/dotfiles.config.toml).
